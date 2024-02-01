@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+  <title>MITA+</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  <style>
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("/w3images/coffeehouse.jpg");
+  min-height: 75%;
+}
+.menu {
+  display: none;
+}
+#jt{
+  background-image: url("https://mitaoe.ac.in/assets/images/gallery/campus7.jpg");
+  min-height: 100%;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#jt2{
+  background-image: url("{% static 'myproject/media/group2.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#smallbox{
+  background-color: #eee;
+  width: 100%;
+  height: 500px;
+  border: 1px dotted black;
+  overflow-y: scroll;
+}
+#smallbox::-webkit-scrollbar {
+    display: none;
+}
+
+#smallbox {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
+</head>
+<body>
+<div class="w3-top" style="position: relative;z-index: 0;">
+  <div class="w3-row w3-padding w3-black">
+    <div class="w3-col s6">
+      <a href="/admin_home/" class="w3-button w3-block w3-black">HOME</a>
+    </div>
+    <div class="w3-col s6">
+      <a href="/logout_user/" class="w3-button w3-block w3-black">SIGN OUT</a>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="container">
+  <form class="row g-3" action="/edit_student_save/" method="POST">
+    {%csrf_token%}
+    <div class="col-md-4">
+      <label for="validationDefault01" class="form-label" style="color: var(--two-color);">First Name</label>
+      <input value="{{student.admin.first_name}}" name="first_name" type="text" class="form-control" id="validationDefault01" placeholder="Enter First Name" required>
+    </div>
+    <div class="col-md-4">
+      <label for="validationDefault02" class="form-label" style="color: var(--two-color);">Last Name</label>
+      <input value="{{student.admin.last_name}}" name="last_name" type="text" class="form-control" id="validationDefault02" placeholder="Enter Last Name" required>
+    </div>
+    <div class="col-md-4">
+      <label for="validationDefaultUsername" class="form-label" style="color: var(--two-color);">Email</label>
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroupPrepend2">@</span>
+        <input value="{{student.admin.email}}" name="email" type="email" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" placeholder="Enter Email ID" required>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault03" class="form-label" style="color: var(--two-color);">Middle Name</label>
+      <input value="{{student.middle_name}}" name="middle_name" type="text" class="form-control" id="validationDefault03" placeholder="Enter Middle Name" required>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault04" class="form-label" style="color: var(--two-color);">PRN</label>
+      <input value="{{student.prn}}" name="prn" type="text" class="form-control" id="validationDefault04" placeholder="Enter PRN" required>
+      <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+    </div>
+    <div class="col-md-3">
+      <label for="validationDefault06" class="form-label" style="color: var(--two-color);">Date of Birth</label>
+      <input value="{{student.date_of_birth}}" name="date_of_birth" type="date" class="form-control" id="validationDefault06" placeholder="Date of Birth" required>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault07" class="form-label" style="color: var(--two-color);">Branch</label>
+      <input value="{{student.branch}}" name="branch" type="text" class="form-control" id="validationDefault07" placeholder="Enter Branch" required>
+    </div>
+    <div class="col-md-3">
+      <label for="validationDefault08" class="form-label" style="color: var(--two-color);">Gender</label>
+      <input value="{{student.gender}}" name="gender" type="text" class="form-control" id="validationDefault08" placeholder="Enter Gender" required>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault09" class="form-label" style="color: var(--two-color);">Year of Admission</label>
+      <input value="{{student.year_of_admission}}" name="year_of_admission" type="text" class="form-control" id="validationDefault09" placeholder="Enter Year of Admission" required>
+    </div>
+    <div class="col-md-6">
+      <label for="validationDefault010" class="form-label" style="color: var(--two-color);">Type of Admission</label>
+      <input value="{{student.type_of_admission}}" name="type_of_admission" type="text" class="form-control" id="validationDefault010" placeholder="Enter Type of Admission" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault012" class="form-label" style="color: var(--two-color);">SSC Percentage</label>
+      <input value="{{student.ssc_percentage}}" name="ssc_percentage" type="text" class="form-control" id="validationDefault012" placeholder="Enter SSC Percentage" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault013" class="form-label" style="color: var(--two-color);">HSC Percentage</label>
+      <input value="{{student.hsc_percentage}}" name="hsc_percentage" type="text" class="form-control" id="validationDefault013" placeholder="Enter HSC Percentage" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault014" class="form-label" style="color: var(--two-color);">Sem1 FY SGPA</label>
+      <input value="{{student.sgpa_fy_sem1}}" name="sgpa_fy_sem1" type="text" class="form-control" id="validationDefault014" placeholder="Enter Sem1 FY SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault015" class="form-label" style="color: var(--two-color);">Sem2 FY SGPA</label>
+      <input value="{{student.sgpa_fy_sem2}}" name="sgpa_fy_sem2" type="text" class="form-control" id="validationDefault015" placeholder="Enter Sem2 FY SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault016" class="form-label" style="color: var(--two-color);">Sem1 SY SGPA</label>
+      <input value="{{student.sgpa_sy_sem1}}" name="sgpa_sy_sem1" type="text" class="form-control" id="validationDefault016" placeholder="Enter Sem1 SY SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault017" class="form-label" style="color: var(--two-color);">Sem2 SY SGPA</label>
+      <input value="{{student.sgpa_sy_sem2}}" name="sgpa_sy_sem2" type="text" class="form-control" id="validationDefault017" placeholder="Enter Sem2 SY SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault018" class="form-label" style="color: var(--two-color);">Sem1 TY SGPA</label>
+      <input value="{{student.sgpa_ty_sem1}}" name="sgpa_ty_sem1" type="text" class="form-control" id="validationDefault018" placeholder="Enter Sem1 TY SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault019" class="form-label" style="color: var(--two-color);">Sem2 TY SGPA</label>
+      <input value="{{student.sgpa_ty_sem2}}" name="sgpa_ty_sem2" type="text" class="form-control" id="validationDefault019" placeholder="Enter Sem2 TY SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault020" class="form-label" style="color: var(--two-color);">Sem1 BTECH SGPA</label>
+      <input value="{{student.sgpa_btech_sem1}}" name="sgpa_btech_sem1" type="text" class="form-control" id="validationDefault020" placeholder="Enter Sem1 BTECH SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault021" class="form-label" style="color: var(--two-color);">Sem2 BTECH SGPA</label>
+      <input value="{{student.sgpa_btech_sem2}}" name="sgpa_btech_sem2" type="text" class="form-control" id="validationDefault021" placeholder="Enter Sem2 BTECH SGPA" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault022" class="form-label" style="color: var(--two-color);">Average ELQ Score in SY</label>
+      <input value="{{student.avg_elq_sy}}" name="avg_elq_sy" type="text" class="form-control" id="validationDefault022" placeholder="Enter Average ELQ Score in SY" required>
+    </div>
+    <div class="col-md-2">
+      <label for="validationDefault023" class="form-label" style="color: var(--two-color);">Average ELQ Score in TY</label>
+      <input value="{{student.avg_elq_ty}}" name="avg_elq_ty" type="text" class="form-control" id="validationDefault023" placeholder="Enter Average ELQ Score in TY" required>
+    </div>
+    <div class="col-12">
+    </div>
+    <div class="col-12" style="padding: 0 0 0 550px;">
+      <button class="btn btn-primary" type="submit" style=" padding: 10px 50px 10px 50px;background-color: var(--three-color);color: var(--two-color);">Submit</button>
+    </div>
+  </form>
+</div>
+<br>
+<br>
+<footer class="w3-container w3-dark-grey">
+  <div style="text-align: center;color: var(--two-color);padding: 20px 0 20px 20px;font-size: 20px;background-color: var(--one-color);">
+    <div class="row" >
+      <div class="col-lg-6">
+        <b style="font-size: 30px">About Group-47:</b>
+        <br>
+        <ul class="list-unstyled">
+          <li>Abraham Ahmed, student from Computer department.</li>
+          <li>Ashutosh Rajput, student from Computer department.</li>
+          <li>Atharva Mohod, student from Computer department.</li>
+          <li>Saurabh Bade, student from ENTC department.</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <b style="font-size: 30px">Instructor:</b>
+        <br>
+        <p>Mrs.Ranjana Badre and Mr.Rudraguada Patil are the instructors of Group-47.</p>
+        <br>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="w3-black w3-center w3-padding-24">@<a href="https://mitaoe.ac.in/" title="W3.CSS" target="_blank" class="w3-hover-opacity">MITAOE</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script>
+// Tabbed Menu
+function openMenu(evt, menuName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menu");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+  }
+  document.getElementById(menuName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+}
+document.getElementById("myLink").click();
+</script>
+<script src="{% static 'myproject/js/delete_alert.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/update.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/delete.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/viewpwd.js'%}" type="text/javascript"></script>
+</body>
+</html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--{% load static %}-->
+<!--<html>-->
+<!--<head>-->
+<!--  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+<!--  <title>Welcome</title>-->
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--  <link rel="stylesheet" href="{% static 'myproject/css/welcome_admin.css'%}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav style="background-color: var(&#45;&#45;three-color);" class="navbar navbar-light" style="background-color: #e3f2fd;">-->
+<!--  <div class="container-fluid">-->
+<!--    <a style="color: var(&#45;&#45;two-color);" class="navbar-brand" href="#">Head of Department</a>-->
+<!--    <button style="background-color: var(&#45;&#45;eight-color);" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li class="nav-item">-->
+<!--          <a style="color: var(&#45;&#45;two-color);" class="nav-link" href="https://mitaoe.ac.in/">MITAOE</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a style="color: var(&#45;&#45;two-color);" class="nav-link" href="/admin_home/">Home</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+<!--<div  style="background-color: var(&#45;&#45;one-color);padding: 20px 0 20px 0;text-align: center;">-->
+<!--  <b style="color: var(&#45;&#45;two-color);font-size: 50px;">Update Student</b>-->
+<!--</div>-->
+
+<!--<div  style="background-color: var(&#45;&#45;one-color);">-->
+<!--  <div class="container">-->
+<!--    <form class="row g-3" action="/edit_student_save/" method="POST">-->
+<!--      {%csrf_token%}-->
+<!--      <div class="col-md-4">-->
+<!--        <label for="validationDefault01" class="form-label" style="color: var(&#45;&#45;two-color);">First Name</label>-->
+<!--        <input value="{{student.admin.first_name}}" name="first_name" type="text" class="form-control" id="validationDefault01" placeholder="Enter First Name" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-4">-->
+<!--        <label for="validationDefault02" class="form-label" style="color: var(&#45;&#45;two-color);">Last Name</label>-->
+<!--        <input value="{{student.admin.last_name}}" name="last_name" type="text" class="form-control" id="validationDefault02" placeholder="Enter Last Name" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-4">-->
+<!--        <label for="validationDefaultUsername" class="form-label" style="color: var(&#45;&#45;two-color);">Email</label>-->
+<!--        <div class="input-group">-->
+<!--          <span class="input-group-text" id="inputGroupPrepend2">@</span>-->
+<!--          <input value="{{student.admin.email}}" name="email" type="email" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" placeholder="Enter Email ID" required>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-md-6">-->
+<!--        <label for="validationDefault03" class="form-label" style="color: var(&#45;&#45;two-color);">Middle Name</label>-->
+<!--        <input value="{{student.middle_name}}" name="middle_name" type="text" class="form-control" id="validationDefault03" placeholder="Enter Middle Name" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-3">-->
+<!--        <label for="validationDefault04" class="form-label" style="color: var(&#45;&#45;two-color);">PRN</label>-->
+<!--        <input value="{{student.prn}}" name="prn" type="text" class="form-control" id="validationDefault04" placeholder="Enter PRN" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-3">-->
+<!--        <label for="validationDefault05" class="form-label" style="color: var(&#45;&#45;two-color);">Password</label>-->
+<!--        <input name="password" type="password" class="form-control" id="validationDefault05" placeholder="Enter Password" required>-->
+<!--        <input type="hidden"  name="student_id" value="{{ student.admin.id }}">-->
+<!--      </div>-->
+<!--      <div class="col-md-3">-->
+<!--        <label for="validationDefault06" class="form-label" style="color: var(&#45;&#45;two-color);">Date of Birth</label>-->
+<!--        <input value="{{student.date_of_birth}}" name="date_of_birth" type="date" class="form-control" id="validationDefault06" placeholder="Date of Birth" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-6">-->
+<!--        <label for="validationDefault07" class="form-label" style="color: var(&#45;&#45;two-color);">Branch</label>-->
+<!--        <input value="{{student.branch}}" name="branch" type="text" class="form-control" id="validationDefault07" placeholder="Enter Branch" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-3">-->
+<!--        <label for="validationDefault08" class="form-label" style="color: var(&#45;&#45;two-color);">Gender</label>-->
+<!--        <input value="{{student.gender}}" name="gender" type="text" class="form-control" id="validationDefault08" placeholder="Enter Gender" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-6">-->
+<!--        <label for="validationDefault09" class="form-label" style="color: var(&#45;&#45;two-color);">Year of Admission</label>-->
+<!--        <input value="{{student.year_of_admission}}" name="year_of_admission" type="text" class="form-control" id="validationDefault09" placeholder="Enter Year of Admission" required>-->
+<!--      </div>-->
+<!--      <div class="col-md-6">-->
+<!--        <label for="validationDefault010" class="form-label" style="color: var(&#45;&#45;two-color);">Type of Admission</label>-->
+<!--        <input value="{{student.type_of_admission}}" name="type_of_admission" type="text" class="form-control" id="validationDefault010" placeholder="Enter Type of Admission" required>-->
+<!--      </div>-->
+<!--      <div class="col-12">-->
+<!--      </div>-->
+<!--      <div class="col-12" style="padding: 0 0 0 550px;">-->
+<!--        <button class="btn btn-primary" type="submit" style=" padding: 10px 50px 10px 50px;background-color: var(&#45;&#45;three-color);color: var(&#45;&#45;two-color);">Submit</button>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div style="background-color: var(&#45;&#45;one-color);text-align: center;padding: 50px;">-->
+<!--  <b style="color: var(&#45;&#45;two-color);font-size: 50px;">Themes</b>-->
+<!--</div>-->
+<!--<div>-->
+<!--  <div class="card-group">-->
+<!--    <div style="background-color: var(&#45;&#45;one-color);" id="icon3" class="card">-->
+<!--      <img src="https://wallpapercave.com/wp/wp3439738.jpg" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <h5 style="color: var(&#45;&#45;two-color);text-align: center;" class="card-title">Light mode</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div style="background-color: var(&#45;&#45;one-color);" id="icon2" class="card">-->
+<!--      <img src="https://i.imgur.com/22JZRPa.png" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <h5 style="color: var(&#45;&#45;two-color);text-align: center;" class="card-title">Dracula mode</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div style="background-color: var(&#45;&#45;one-color);" id="icon" class="card">-->
+<!--      <img src="https://wallpaperaccess.com/full/2562648.jpg" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <h5 style="color: var(&#45;&#45;two-color);text-align: center;" class="card-title">Dark Mode</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div style="text-align: center;color: var(&#45;&#45;two-color);padding: 20px 0 20px 20px;font-size: 20px;background-color: var(&#45;&#45;one-color);">-->
+<!--  <div class="row" >-->
+<!--    <div class="col-lg-6">-->
+<!--      <b style="font-size: 30px">About Group-47:</b>-->
+<!--      <br>-->
+<!--      <ul class="list-unstyled">-->
+<!--        <li>Abraham Ahmed, student from Computer department.</li>-->
+<!--        <li>Ashutosh Rajput, student from Computer department.</li>-->
+<!--        <li>Atharva Mohod, student from Computer department.</li>-->
+<!--        <li>Saurabh Bade, student from ENTC department.</li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <div class="col-lg-6">-->
+<!--      <b style="font-size: 30px">Instructor:</b>-->
+<!--      <br>-->
+<!--      <p>Mrs.Ranjana Badre and Mr.Rudraguada Patil are the instructors of Group-47.</p>-->
+<!--      <br>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div style="color: var(&#45;&#45;one-color);font-size: 20px;text-align: center;background-color: var(&#45;&#45;two-color);">-->
+<!--  <h>@MITAOE</h>-->
+<!--</div>-->
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>-->
+<!--<script src="{% static 'myproject/js/light.js'%}" type="text/javascript"></script>-->
+<!--<script src="{% static 'myproject/js/dark.js'%}" type="text/javascript"></script>-->
+<!--<script src="{% static 'myproject/js/dracula.js'%}" type="text/javascript"></script>-->
+<!--</body>-->
+<!--</html>-->

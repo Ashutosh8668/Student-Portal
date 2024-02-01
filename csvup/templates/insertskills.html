@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'myproject/css/welcome_admin.css'%}">
+    <style>
+    #id1:hover{
+                box-shadow: 10px 10px 10px 10px grey;
+              }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Student</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/student_home/">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div style="background-color: white;padding: 20px 0 20px 0;">
+    <div class="container" style="padding: 20px 0 20px 0;">
+        <form action="/updateskills/" method="post">
+            {% csrf_token %}
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Enter Title of Completed Certifications</label>
+                    <input type="text" class="form-control" name="completed_certification" placeholder="Enter All Titles" value="{{ student.completed_certification}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of Other Completed Certifications</label>
+                    <input type="text" class="form-control" name="other_completed_certification" placeholder="Enter All Titles" value="{{ student.other_completed_certification}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of Ongoing Certifications</label>
+                    <input type="text" class="form-control" name="ongoing_certification" placeholder="Enter All Titles" value="{{ student.ongoing_certification}}" required>
+                    <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of Dropped Completed Certifications</label>
+                    <input type="text" class="form-control" name="dropped_certification" placeholder="Enter All Titles" value="{{ student.dropped_certification}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of FY Summer Internship or Project Details</label>
+                    <input type="text" class="form-control" name="fy_summer_internship" placeholder="Enter All Titles" value="{{ student.fy_summer_internship}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of SY Summer Internship or Project Details</label>
+                    <input type="text" class="form-control" name="sy_summer_internship" placeholder="Enter All Titles" value="{{ student.sy_summer_internship}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of TY Summer Internship or Project Details</label>
+                    <input type="text" class="form-control" name="ty_summer_internship" placeholder="Enter All Titles" value="{{ student.ty_summer_internship}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of Sponsored Project - Industry</label>
+                    <input type="text" class="form-control" name="sponsored_project_industry" placeholder="Enter All Titles" value="{{ student.sponsored_project_industry}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Title of B.E. or Diploma Project</label>
+                    <input type="text" class="form-control" name="be_diploma_project_title" placeholder="Enter All Titles" value="{{ student.be_diploma_project_title}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Open Elective - Specialisation</label>
+                    <input type="text" class="form-control" name="open_elective_specialisation" placeholder="Enter All Titles" value="{{ student.open_elective_specialisation}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Programming Languages Known</label>
+                    <input type="text" class="form-control" name="programming_languages_known" placeholder="Enter All Titles" value="{{ student.programming_languages_known}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Frameworks Known</label>
+                    <input type="text" class="form-control" name="frameworks_known" placeholder="Enter All Titles" value="{{ student.frameworks_known}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Additional Communication Languages Known</label>
+                    <input type="text" class="form-control" name="languages_known" placeholder="Enter All Titles" value="{{ student.languages_known}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Software Known</label>
+                    <input type="text" class="form-control" name="software_known" placeholder="Enter All Titles" value="{{ student.software_known}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Co-curricular Activities (Top 3) ( Write NA if Not)</label>
+                    <input type="text" class="form-control" name="co_curricular_activities" placeholder="Enter All Titles" value="{{ student.co_curricular_activities}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Special Achievements (State/National Level)</label>
+                    <input type="text" class="form-control" name="special_achievements" placeholder="Enter All Titles" value="{{ student.special_achievements}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Scholarship Availed</label>
+                    <input type="text" class="form-control" name="scholarship" placeholder="Enter All Titles" value="{{ student.scholarship}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Additional Training Details</label>
+                    <input type="text" class="form-control" name="additional_details" placeholder="Enter All Titles" value="{{ student.additional_details}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Extra Curricular Activities</label>
+                    <input type="text" class="form-control" name="extra_curricular_activities" placeholder="Enter All Titles" value="{{ student.extra_curricular_activities}}" required>
+                </div>
+                <div class="form-group">
+                    <label>Enter Certification</label>
+                    <input type="text" class="form-control" name="certification_done" placeholder="Yes/No" value="{{ student.certification_done}}" required>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="form-group">
+                <input type="submit" class="form-control" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="background-color: var(--one-color);text-align: center;padding: 50px;">
+    <b style="color: var(--two-color);font-size: 50px;">Themes</b>
+</div>
+<div>
+    <div class="card-group">
+        <div style="background-color: var(--one-color);" id="icon3" class="card">
+            <img src="https://wallpapercave.com/wp/wp3439738.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 style="color: var(--two-color);text-align: center;" class="card-title">Light mode</h5>
+            </div>
+        </div>
+        <div style="background-color: var(--one-color);" id="icon2" class="card">
+            <img src="https://i.imgur.com/22JZRPa.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 style="color: var(--two-color);text-align: center;" class="card-title">Dracula mode</h5>
+            </div>
+        </div>
+        <div style="background-color: var(--one-color);" id="icon" class="card">
+            <img src="https://wallpaperaccess.com/full/2562648.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 style="color: var(--two-color);text-align: center;" class="card-title">Dark Mode</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="text-align: center;color: var(--two-color);padding: 20px 0 20px 20px;font-size: 20px;background-color: var(--one-color);">
+    <div class="row" >
+        <div class="col-lg-6">
+            <b style="font-size: 30px">About Group-47:</b>
+            <br>
+            <ul class="list-unstyled">
+                <li>Abraham Ahmed, student from Computer department.</li>
+                <li>Ashutosh Rajput, student from Computer department.</li>
+                <li>Atharva Mohod, student from Computer department.</li>
+                <li>Saurabh Bade, student from ENTC department.</li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            <b style="font-size: 30px">Instructor:</b>
+            <br>
+            <p>Mrs.Ranjana Badre and Mr.Rudraguada Patil are the instructors of Group-47.</p>
+            <br>
+        </div>
+    </div>
+</div>
+<div style="color: var(--one-color);font-size: 20px;text-align: center;background-color: var(--two-color);">
+    <h>@MITAOE</h>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="{% static 'myproject/js/light.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/dark.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/dracula.js'%}" type="text/javascript"></script>
+</body>
+</html>

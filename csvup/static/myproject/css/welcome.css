@@ -1,0 +1,20 @@
+#menu{
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_536908015_2000133320009280275_79534.jpg");
+    background-repeat: no-repeat;
+    max-width: 100%;
+    background-size: cover;
+    padding: 250px 10px;
+    text-align: left;
+}
+.card:hover {
+    box-shadow: 10px 10px 10px 10px grey;
+    background-color: #42c8f5;
+}
+html,body
+        {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+        }

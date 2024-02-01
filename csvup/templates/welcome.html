@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+  <title>MITA+</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+#jt{
+  background-image: url("{% static 'myproject/media/campus7.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#jt2{
+  background-image: url("{% static 'myproject/media/gdsc.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#jt3{
+  background-image: url("{% static 'myproject/media/group1.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#jt4{
+  background-image: url("{% static 'myproject/media/group2.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#jt5{
+  background-image: url("{% static 'myproject/media/campus5.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#imgpro{
+  min-height: 100%;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 200px;
+}
+.list-unstyled{
+  list-style-type: none;
+}
+#list{
+  padding: 30px 0 30px 0;
+}
+</style>
+</head>
+<body class="w3-light-grey w3-content" style="max-width:1600px;background: #acb6e5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #86fde8, #acb6e5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #86fde8, #acb6e5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+">
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="{% static 'myproject/media/MITA.png'%}" style="width:100%;" class="w3-round"><br><br>
+    <div class="form-group">
+      {% if messages %}
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+      {% endif %}
+      {% if message.tags == 'success' %}
+      <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+    <h4><b>MITA+</b></h4>
+    <p class="w3-text-grey">{{studentprn}}</p>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>HOME</a>
+    <a href="#details" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bank fa-fw w3-margin-right"></i>DETAILS</a>
+    <a href="#dashboard" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-dashboard fa-fw w3-margin-right"></i>DASHBOARD</a>
+    <a href="#settings" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw w3-margin-right"></i>SETTINGS</a>
+    <a href="/logout_user/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>SIGN OUT</a>
+  </div>
+  <div class="w3-panel w3-large">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <header id="portfolio">
+    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+      <h1><b>Make IT Adaptive</b></h1>
+      <div class="jumbotron" id="jt">
+        <div class="container" style="text-align: center;padding-top: 400px;">
+          <b style="font-size: 50px;color: black;">Welcome {{username}}</b>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+          <h3 style="text-align:center;">VISION</h3>
+          <p>To be a new age learning center for holistic development of students into professional engineers, to cater to the changing needs of techno-society.</p>
+        </div>
+      </div>
+      <div class="jumbotron" id="jt2" style="padding-left: 900px;">
+        <div class="container" style="color:#ddd;background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);padding-top: 30px;padding-left: 10px;">
+            <h3 style="padding-left: 20px;padding-bottom: 20px;">FEATURES</h3>
+            <ul class="list-unstyled" style="padding-left: 20px;">
+              <li id="list">Add and update details</li>
+              <br>
+              <li id="list">View dashboard and analyse grades</li>
+              <br>
+              <li id="list">Change your settings</li>
+              <br>
+              <li id="list">Use recommendation system</li>
+              <br>
+            </ul>
+        </div>
+      </div>
+      <div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
+        <h3 style="text-align:center;">MISSION</h3>
+        <ul>
+          <li>To provide new age infrastructural facilities blended with skill based curriculum and activity based pedagogical approaches to develop competitive engineering professionals to solve real world problems.</li>
+          <br>
+          <li>To prepare students for lifelong learning by transforming educational practices.</li>
+          <br>
+          <li>To promote ethical and moral values by involving students into community services.</li>
+          <br>
+          <li>To promote entrepreneurship and managerial skills by strengthening industry-institute interaction.</li>
+          <br>
+        </ul>
+      </div>
+
+      <div class="jumbotron" id="jt3">
+        <div class="container" style="text-align: center;padding-top: 400px;">
+          <b style="font-size: 70px;color: black;">All Details</b>
+        </div>
+      </div>
+      <!--      <div class="w3-section w3-bottombar w3-padding-16">-->
+      <!--        <span class="w3-margin-right">Filter:</span>-->
+      <!--        <button class="w3-button w3-black">ALL</button>-->
+      <!--        <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>-->
+      <!--        <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>-->
+      <!--        <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>-->
+      <!--      </div>-->
+      <!--    </div>-->
+  </header>
+
+
+
+  <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+    <!--    <h4><b>About Me</b></h4>-->
+    <!--    <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>-->
+    <!--    <hr>-->
+
+    <!--    <h4>Technical Skills</h4>-->
+    <!--    &lt;!&ndash; Progress bars / Skills &ndash;&gt;-->
+    <!--    <p>Photography</p>-->
+    <!--    <div class="w3-grey">-->
+    <!--      <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:95%">95%</div>-->
+    <!--    </div>-->
+    <!--    <p>Web Design</p>-->
+    <!--    <div class="w3-grey">-->
+    <!--      <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:85%">85%</div>-->
+    <!--    </div>-->
+    <!--    <p>Photoshop</p>-->
+    <!--    <div class="w3-grey">-->
+    <!--      <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:80%">80%</div>-->
+    <!--    </div>-->
+    <!--    <p>-->
+    <!--      <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">-->
+    <!--        <i class="fa fa-download w3-margin-right"></i>Download Resume-->
+    <!--      </button>-->
+    <!--    </p>-->
+    <h4 id="details" style="font-size: 30px;padding: 10px 0 10px 0;text-align: center;">Basic Details</h4>
+    <!-- Pricing Tables -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-third w3-margin-bottom">
+        <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-black w3-xlarge w3-padding-32">Placement</li>
+          <div  id="imgpro" style="background-image: url({% static 'myproject/media/img1.jpg'%});">
+            <h>Placement Details</h>
+          </div>
+          <li class="w3-light-grey w3-padding-24">
+            <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#placement" role="button" aria-expanded="false" aria-controls="placement"><button class="w3-button w3-teal w3-padding-large w3-hover-black">Enter</button></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-third w3-margin-bottom">
+        <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-teal w3-xlarge w3-padding-32">Contact</li>
+          <div  id="imgpro" style="background-image: url({% static 'myproject/media/img2.jpg'%});">
+            <h>Contact Details</h>
+          </div>
+          <li class="w3-light-grey w3-padding-24">
+            <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#number" role="button" aria-expanded="false" aria-controls="number"><button class="w3-button w3-teal w3-padding-large w3-hover-black">Enter</button></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-third">
+        <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-black w3-xlarge w3-padding-32">Personal Information</li>
+          <div  id="imgpro" style="background-image: url({% static 'myproject/media/img3.png'%});">
+            <h>Personal Details</h>
+          </div>
+          <li class="w3-light-grey w3-padding-24">
+            <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#personal" role="button" aria-expanded="false" aria-controls="personal"><button class="w3-button w3-teal w3-padding-large w3-hover-black">Enter</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="collapse" id="placement">
+      <div>
+        <form action="/updateplacement/" method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-group">
+              <label>Do you wish to get College Placements?</label>
+              <input type="text" class="form-control" name="want_college_placement" placeholder="Your response" value="{{ student.want_college_placement}}" required>
+            </div>
+            <div class="form-group">
+              <label>Opt-Out Form Placement (Undertaking)</label>
+              <input type="text" class="form-control" placeholder="Your response" name="out_placement" value="{{ student.out_placement}}">
+            </div>
+            <div class="form-group">
+              <label>Personal Email</label>
+              <input type="email" class="form-control" placeholder="Enter Personal Email" name="personal_email" value="{{ student.personal_email}}" required>
+              <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+            </div>
+            <div class="form-group">
+              <label>College Email</label>
+              <input type="email" class="form-control" placeholder="Enter College Email" name="college_email" value="{{ student.college_email }}" required>
+            </div>
+            <div class="form-group">
+              <label>Did you give AMCAT Exam in SY?</label>
+              <input type="text" class="form-control" placeholder="Yes/No" name="gave_amcat_sy" value="{{ student.gave_amcat_sy }}" required>
+            </div>
+            <div class="form-group">
+              <label>Did you give AMCAT Exam in TY?</label>
+              <input type="text" class="form-control" placeholder="Yes/No" name="gave_amcat_ty" value="{{ student.gave_amcat_ty }}" required>
+            </div>
+            <div class="form-group">
+              <label>Are you Diploma Student?</label>
+              <input type="text" class="form-control" placeholder="Yes/No" name="diploma_student" value="{{ student.diploma_student }}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Diploma Percentage?</label>
+              <input type="text" class="form-control" placeholder="Example 92.75" name="diploma_percentage" value="{{ student.diploma_percentage }}" required>
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="form-group">
+            <input type="submit" class="form-control" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="collapse" id="number">
+      <div>
+        <form action="/updatenumbers/" method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-group">
+              <label>Enter Mobile Number</label>
+              <input type="text" class="form-control" name="mobile_number" placeholder="Example 9022186745" value="{{ student.mobile_number}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Whatsapp Number</label>
+              <input type="text" class="form-control" name="whatsapp_number" placeholder="Example 9022186745" value="{{ student.whatsapp_number}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Alternate Mobile Number</label>
+              <input type="text" class="form-control" name="alternate_number" placeholder="Example 9022186745" value="{{ student.alternate_number}}">
+              <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="form-group">
+            <input type="submit" class="form-control" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="collapse" id="personal">
+      <div>
+        <form action="/updatepersonals/" method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-group">
+              <label>Fathers Name</label>
+              <input type="text" class="form-control" name="father_name" placeholder="Enter Fathers Name" value="{{ student.father_name}}" required>
+            </div>
+            <div class="form-group">
+              <label>Mothers Name</label>
+              <input type="text" class="form-control" name="mother_name" placeholder="Enter Mothers Name" value="{{ student.mother_name}}" required>
+            </div>
+            <div class="form-group">
+              <label>Permanent Address</label>
+              <input type="text" class="form-control" name="permanent_address" placeholder="Enter Permanent Address" value="{{ student.permanent_address}}" required>
+              <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+            </div>
+            <div class="form-group">
+              <label>Current Address</label>
+              <input type="text" class="form-control" name="current_address" placeholder="Enter Current Address" value="{{ student.current_address}}" required>
+            </div>
+            <div class="form-group">
+              <label>Do you have Backlog?</label>
+              <input type="text" class="form-control" name="have_backlog" placeholder="Yes/No" value="{{ student.have_backlog}}" required>
+            </div>
+            <div class="form-group">
+              <label>Live Backlog</label>
+              <input type="text" class="form-control" name="live_backlog" placeholder="Example ME105T - Engineering Graphics, AS105T - Calculus and Differential Equations." value="{{ student.live_backlog}}" required>
+            </div>
+            <div class="form-group">
+              <label>Dead Backlog</label>
+              <input type="text" class="form-control" name="dead_backlog" placeholder="Example ME105T - Engineering Graphics, AS105T - Calculus and Differential Equations." value="{{ student.dead_backlog}}" required>
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="form-group">
+            <input type="submit" class="form-control" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <h4 style="font-size: 30px;padding: 10px 0 10px 0;text-align: center;">Advance Details</h4>
+    <!-- Pricing Tables -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-third w3-margin-bottom">
+        <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-black w3-xlarge w3-padding-32">Grades</li>
+          <div  id="imgpro" style="background-image: url({% static 'myproject/media/img4.jpg'%});">
+            <h>Grade Details</h>
+          </div>
+          <li class="w3-light-grey w3-padding-24">
+            <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#grade" role="button" aria-expanded="false" aria-controls="grade"><button class="w3-button w3-teal w3-padding-large w3-hover-black">Enter</button></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-third w3-margin-bottom">
+        <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-teal w3-xlarge w3-padding-32">URL</li>
+          <div  id="imgpro" style="background-image: url({% static 'myproject/media/img5.webp'%});">
+            <h>URL Links</h>
+          </div>
+          <li class="w3-light-grey w3-padding-24">
+            <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#url" role="button" aria-expanded="false" aria-controls="url"><button class="w3-button w3-teal w3-padding-large w3-hover-black">Enter</button></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-third">
+        <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-black w3-xlarge w3-padding-32">Skills</li>
+          <div  id="imgpro" style="background-image: url({% static 'myproject/media/img6.jpg'%});">
+            <h>Add Skills</h>
+          </div>
+          <li class="w3-light-grey w3-padding-24">
+            <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#skill" role="button" aria-expanded="false" aria-controls="skill"><button class="w3-button w3-teal w3-padding-large w3-hover-black">Enter</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="collapse" id="grade">
+      <div>
+        <form action="/updategrades/" method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-group">
+              <label>Enter SSC Percentage</label>
+              <input type="text" class="form-control" name="ssc_percentage" placeholder="Example 95.00" value="{{ student.ssc_percentage}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter HSC Percentage</label>
+              <input type="text" class="form-control" name="hsc_percentage" placeholder="Example 85.84" value="{{ student.hsc_percentage}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Sem1 FY SGPA</label>
+              <input type="text" class="form-control" name="sgpa_fy_sem1" placeholder="Example 7.5" value="{{ student.sgpa_fy_sem1}}" disabled>
+              <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+            </div>
+            <div class="form-group">
+              <label>Enter Sem2 FY SGPA</label>
+              <input type="text" class="form-control" name="sgpa_fy_sem2" placeholder="Example 10.00" value="{{ student.sgpa_fy_sem2}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Sem1 SY SGPA</label>
+              <input type="text" class="form-control" name="sgpa_sy_sem1" placeholder="Example 7.5" value="{{ student.sgpa_sy_sem1}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Sem2 SY SGPA</label>
+              <input type="text" class="form-control" name="sgpa_sy_sem2" placeholder="Example 10.00" value="{{ student.sgpa_sy_sem2}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Sem1 TY SGPA</label>
+              <input type="text" class="form-control" name="sgpa_ty_sem1" placeholder="Example 7.5" value="{{ student.sgpa_ty_sem1}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Sem2 TY SGPA</label>
+              <input type="text" class="form-control" name="sgpa_ty_sem2" placeholder="Example 10.00" value="{{ student.sgpa_ty_sem2}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Sem1 BTECH SGPA</label>
+              <input type="text" class="form-control" name="sgpa_btech_sem1" placeholder="Example 7.5" value="{{ student.sgpa_btech_sem1}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Sem2 BTECH SGPA</label>
+              <input type="text" class="form-control" name="sgpa_btech_sem2" placeholder="Example 10.00" value="{{ student.sgpa_btech_sem2}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Average ELQ Score in SY</label>
+              <input type="text" class="form-control" name="avg_elq_sy" placeholder="Example 407.27" value="{{ student.avg_elq_sy}}" disabled>
+            </div>
+            <div class="form-group">
+              <label>Enter Average ELQ Score in TY</label>
+              <input type="text" class="form-control" name="avg_elq_ty" placeholder="Example 900.00" value="{{ student.avg_elq_ty}}" disabled>
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="form-group">
+            <input type="submit" class="form-control" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="collapse" id="url">
+      <div>
+        <form action="/updateurls/" method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-group">
+              <label>Enter Linkedin URL</label>
+              <input type="url" class="form-control" name="linkedin_url" placeholder="Enter URL" value="{{ student.linkedin_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Preskillet Video URL</label>
+              <input type="url" class="form-control" name="preskillet_video_url" placeholder="Enter URL" value="{{ student.preskillet_video_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Passport Size URL</label>
+              <input type="url" class="form-control" name="passport_size_url" placeholder="Enter URL" value="{{ student.passport_size_url}}" required>
+              <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+            </div>
+            <div class="form-group">
+              <label>Enter Second Year AMCAT Result URL</label>
+              <input type="url" class="form-control" name="sy_amcat_result_url" placeholder="Enter URL" value="{{ student.sy_amcat_result_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Third Year AMCAT Result URL</label>
+              <input type="url" class="form-control" name="ty_amcat_result_url" placeholder="Enter URL" value="{{ student.ty_amcat_result_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Final Second Year AMCAT Result URL</label>
+              <input type="url" class="form-control" name="final_amcat_sy_url" placeholder="Enter URL" value="{{ student.final_amcat_sy_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Final Third Year AMCAT Result URL</label>
+              <input type="url" class="form-control" name="final_amcat_ty_url" placeholder="Enter URL" value="{{ student.final_amcat_ty_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Industry Certifications All Compiled URL</label>
+              <input type="url" class="form-control" name="all_industry_certification_url" placeholder="Enter URL" value="{{ student.all_industry_certification_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Educational Certifications All Compiled URL</label>
+              <input type="url" class="form-control" name="all_education_certification_url" placeholder="Enter URL" value="{{ student.all_education_certification_url}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Internship Certifications All Compiled URL</label>
+              <input type="url" class="form-control" name="all_internship_certification_url" placeholder="Enter URL" value="{{ student.all_internship_certification_url}}" required>
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="form-group">
+            <input type="submit" class="form-control" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="collapse" id="skill">
+      <div>
+        <form action="/updateskills/" method="post">
+          {% csrf_token %}
+          <div class="card-body">
+            <div class="form-group">
+              <label>Enter Title of Completed Certifications</label>
+              <input type="text" class="form-control" name="completed_certification" placeholder="Enter All Titles" value="{{ student.completed_certification}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Title of Other Completed Certifications</label>
+              <input type="text" class="form-control" name="other_completed_certification" placeholder="Enter All Titles" value="{{ student.other_completed_certification}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Title of Ongoing Certifications</label>
+              <input type="text" class="form-control" name="ongoing_certification" placeholder="Enter All Titles" value="{{ student.ongoing_certification}}" required>
+              <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+            </div>
+            <div class="form-group">
+              <label>Enter Title of Dropped Completed Certifications</label>
+              <input type="text" class="form-control" name="dropped_certification" placeholder="Enter All Titles" value="{{ student.dropped_certification}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Title of FY Summer Internship or Project Details</label>
+              <input type="text" class="form-control" name="fy_summer_internship" placeholder="Enter All Titles" value="{{ student.fy_summer_internship}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Title of SY Summer Internship or Project Details</label>
+              <input type="text" class="form-control" name="sy_summer_internship" placeholder="Enter All Titles" value="{{ student.sy_summer_internship}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Title of TY Summer Internship or Project Details</label>
+              <input type="text" class="form-control" name="ty_summer_internship" placeholder="Enter All Titles" value="{{ student.ty_summer_internship}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Title of Sponsored Project - Industry</label>
+              <input type="text" class="form-control" name="sponsored_project_industry" placeholder="Enter All Titles" value="{{ student.sponsored_project_industry}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Title of B.E. or Diploma Project</label>
+              <input type="text" class="form-control" name="be_diploma_project_title" placeholder="Enter All Titles" value="{{ student.be_diploma_project_title}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Open Elective - Specialisation</label>
+              <input type="text" class="form-control" name="open_elective_specialisation" placeholder="Enter All Titles" value="{{ student.open_elective_specialisation}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Programming Languages Known</label>
+              <input type="text" class="form-control" name="programming_languages_known" placeholder="Enter All Titles" value="{{ student.programming_languages_known}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Frameworks Known</label>
+              <input type="text" class="form-control" name="frameworks_known" placeholder="Enter All Titles" value="{{ student.frameworks_known}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Additional Communication Languages Known</label>
+              <input type="text" class="form-control" name="languages_known" placeholder="Enter All Titles" value="{{ student.languages_known}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Software Known</label>
+              <input type="text" class="form-control" name="software_known" placeholder="Enter All Titles" value="{{ student.software_known}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Co-curricular Activities (Top 3) ( Write NA if Not)</label>
+              <input type="text" class="form-control" name="co_curricular_activities" placeholder="Enter All Titles" value="{{ student.co_curricular_activities}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Special Achievements (State/National Level)</label>
+              <input type="text" class="form-control" name="special_achievements" placeholder="Enter All Titles" value="{{ student.special_achievements}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Scholarship Availed</label>
+              <input type="text" class="form-control" name="scholarship" placeholder="Enter All Titles" value="{{ student.scholarship}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Additional Training Details</label>
+              <input type="text" class="form-control" name="additional_details" placeholder="Enter All Titles" value="{{ student.additional_details}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Extra Curricular Activities</label>
+              <input type="text" class="form-control" name="extra_curricular_activities" placeholder="Enter All Titles" value="{{ student.extra_curricular_activities}}" required>
+            </div>
+            <div class="form-group">
+              <label>Enter Certification</label>
+              <input type="text" class="form-control" name="certification_done" placeholder="Yes/No" value="{{ student.certification_done}}" required>
+            </div>
+          </div>
+          <!-- /.card-body -->
+          <div class="form-group">
+            <input type="submit" class="form-control" value="Submit">
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <div class="jumbotron" id="jt4">
+    <div class="container" style="text-align: center;padding-top: 400px;">
+      <b style="font-size: 70px;color: black;">Visualization</b>
+    </div>
+  </div>
+  <!-- Contact Section -->
+  <div>
+  <div class="w3-container w3-padding-large">
+    <div class="container" style="text-align: center;padding-top: 30px;padding-bottom: 20px;">
+    <b id="dashboard" style="font-size: 70px;color: black;">Dashboard</b>
+  </div>
+    <div class="w3-row">
+      <div class="w3-col s3">
+        <div style="text-align: center;">
+    <h4 id="contact" style="color: black;"><b>SSC Percentage</b></h4>
+        </div>
+          <canvas id="myChart" width="50" height="50">
+
+    </canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var myChart = new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+                  labels: ['Scored',''],
+                  datasets: [{
+                      label: 'Percentage Scored',
+                      data: [{{ values.ssc }},{{ values.sscnot }}],
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.8)',
+                          'rgba(54, 162, 235, 0)',
+<!--                          'rgba(255, 206, 86, 0.8)',-->
+<!--                          'rgba(75, 192, 192, 0.8)',-->
+<!--                          'rgba(153, 102, 255, 0.8)',-->
+<!--                          'rgba(255, 159, 64, 0.8)',-->
+<!--                          'rgba(240, 120, 50, 0.8)',-->
+                      ],
+                      borderColor: [
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(54, 162, 235, 1)',
+<!--                          'rgba(255, 206, 86, 1)',-->
+<!--                          'rgba(75, 192, 192, 1)',-->
+<!--                          'rgba(153, 102, 255, 1)',-->
+<!--                          'rgba(255, 159, 64, 1)',-->
+<!--                          'rgba(240, 120, 50, 1)',-->
+
+                      ],
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+              scales: {
+                xAxes: [{
+                  gridLines: {
+                    display: false,
+                    color: "rgba(0, 0, 0, 0)",
+                  },
+                  ticks: {
+                    display: false
+                  }
+                }],
+                yAxes: [{
+                  gridLines: {
+                    display: false,
+                    color: "rgba(0, 0, 0, 0)",
+                  },
+                  ticks: {
+                    display: false
+                  }
+                }]
+              }
+            }
+          });
+          </script>
+    </div>
+      <div class="w3-quarter" style="padding-top: 125px;">
+        <div class="w3-container w3-red w3-padding-16">
+          <div class="w3-left"><i class="fa fa-book w3-xxxlarge"></i></div>
+          <div class="w3-right">
+            <h3>{{values.ssc}}%</h3>
+          </div>
+          <div class="w3-clear"></div>
+          <h4>SSC Score</h4>
+        </div>
+      </div>
+      <div class="w3-quarter" style="padding-top: 125px;">
+        <div class="w3-container w3-orange w3-text-white w3-padding-16">
+          <div class="w3-left"><i class="fa fa-search w3-xxxlarge"></i></div>
+          <div class="w3-right">
+            <h3>{{values.hsc}}%</h3>
+          </div>
+          <div class="w3-clear"></div>
+          <h4>HSC Score</h4>
+      </div>
+      </div>
+      <div class="w3-col s3">
+        <div style="text-align: center;">
+          <h4 id="contact" style="color: black;"><b>HSC Percentage</b></h4>
+        </div>
+        <canvas id="myChart2" width="50" height="50">
+
+        </canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+          var ctx = document.getElementById('myChart2').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+              labels: ['Scored',''],
+              datasets: [{
+                label: 'Percentage Scored',
+                data: [{{ values.hsc }},{{ values.hscnot }}],
+                backgroundColor: [
+                  'rgba(255, 206, 86, 0.8)',
+                  'rgba(54, 162, 235, 0)',
+                ],
+                borderColor: [
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                xAxes: [{
+                  gridLines: {
+                    display: false,
+                    color: "rgba(0, 0, 0, 0)",
+                  },
+                  ticks: {
+                    display: false
+                  }
+                }],
+                yAxes: [{
+                  gridLines: {
+                    display: false,
+                    color: "rgba(0, 0, 0, 0)",
+                  },
+                  ticks: {
+                    display: false
+                  }
+                }]
+              }
+            }
+          });
+
+          </script>
+      </div>
+    </div>
+    <div class="row" style="padding-bottom: 50px;">
+      <div class="w3-col s8">
+        <div style="text-align: center;padding:20px 0 20px 0;">
+          <h4 id="contact"><b>SGPA of all semesters</b></h4>
+        </div>
+      <canvas id="myChart4" width="400" height="250"></canvas>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--      <script>-->
+<!--        var ctx = document.getElementById('myChart4').getContext('2d');-->
+<!--          var chart = new Chart(ctx, {-->
+<!--            type: 'line',-->
+<!--            data: {-->
+<!--              labels: ['FY SGPA Sem1','FY SGPA Sem2','SY SGPA Sem1','SY SGPA Sem2','TY SGPA Sem1','TY SGPA Sem2','BTECH SGPA Sem1','BTECH SGPA Sem2'],-->
+<!--              datasets: [{-->
+<!--                label: 'SGPA',-->
+<!--                data: [{{values.fy1}},{{values.fy2}},{{values.sy1}},{{values.sy2}},{{values.ty1}},{{values.ty2}},{{values.btech1}},{{values.btech2}}],-->
+<!--                fill: false,-->
+<!--                borderColor: "rgb(75, 192, 192)",-->
+<!--                tension: 0.1-->
+<!--              }]-->
+<!--            },-->
+<!--            options: {-->
+<!--            responsive: true,-->
+<!--            scales: {-->
+<!--              yAxes: [{-->
+<!--                ticks: {-->
+<!--                  min: 0,-->
+<!--                  max: 10,-->
+<!--                  stepSize: 1,-->
+<!--                  fontColor: 'white'  // Set font color to white-->
+<!--                },-->
+<!--                scaleLabel: {-->
+<!--                  display: true,-->
+<!--                  labelString: 'SGPA',-->
+<!--                  fontColor: 'white'  // Set font color to white-->
+<!--                }-->
+<!--              }],-->
+<!--              xAxes: [{-->
+<!--                ticks: {-->
+<!--                  fontColor: 'white'  // Set font color to white-->
+<!--                }-->
+<!--              }]-->
+<!--            },-->
+<!--            legend: {-->
+<!--              labels: {-->
+<!--                fontColor: 'white'  // Set font color to white-->
+<!--              }-->
+<!--            }-->
+<!--          }-->
+
+<!--          });-->
+<!--          </script>-->
+        <script>
+var ctx = document.getElementById('myChart4').getContext('2d');
+var chart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['FY SGPA Sem1','FY SGPA Sem2','SY SGPA Sem1','SY SGPA Sem2','TY SGPA Sem1','TY SGPA Sem2','BTECH SGPA Sem1','BTECH SGPA Sem2'],
+    datasets: [{
+      label: 'SGPA',
+      data: [{{values.fy1}},{{values.fy2}},{{values.sy1}},{{values.sy2}},{{values.ty1}},{{values.ty2}},{{values.btech1}},{{values.btech2}}],
+      fill: false,
+      borderColor: function(context) {
+        var index = context.dataIndex;
+        var value = context.dataset.data[index];
+        var previousValue = context.dataset.data[index - 1];
+
+          if (previousValue === undefined || value === previousValue) {
+            return "rgb(75, 192, 192,1)"; // no change or first value, set default color
+          } else if (value > previousValue) {
+            return "rgba(0, 255, 0, 1)"; // line goes up, set green color
+          } else {
+            return "rgba(255, 0, 0, 1)"; // line goes down, set red color
+          }
+        },
+        pointRadius: 12, // set the point radius to 6 pixels
+      pointHoverRadius: 16, // set the point hover radius to 8 pixels
+      tension: 0.1
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 10,
+          stepSize: 1,
+          fontColor: 'white'  // Set font color to white
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'SGPA',
+          fontColor: 'white'  // Set font color to white
+        }
+      }],
+      xAxes: [{
+        ticks: {
+          fontColor: 'white'  // Set font color to white
+        }
+      }]
+    },
+    legend: {
+      labels: {
+        fontColor: 'white'  // Set font color to white
+      }
+    }
+  }
+});
+</script>
+
+      </div>
+      <div class="w3-col s4">
+        <div style="text-align: center;padding:20px 0 20px 0;">
+          <h4 id="contact"><b>Average ELQ Score</b></h4>
+        </div>
+        <canvas id="myChart3" width="400" height="550"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+        var ctx = document.getElementById('myChart3').getContext('2d');
+          var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['SY ELQ Score','TY ELQ Score'],
+              datasets: [{
+                label: 'ELQ',
+                data: [{{values.elqs}},{{values.elqt}}],
+               backgroundColor: [
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+<!--                          'rgba(255, 206, 86, 0.8)',-->
+<!--                          'rgba(75, 192, 192, 0.8)',-->
+<!--                          'rgba(153, 102, 255, 0.8)',-->
+<!--                          'rgba(255, 159, 64, 0.8)',-->
+<!--                          'rgba(240, 120, 50, 0.8)',-->
+                      ],
+                      borderColor: [
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(153, 102, 255, 1)',
+<!--                          'rgba(255, 206, 86, 1)',-->
+<!--                          'rgba(75, 192, 192, 1)',-->
+<!--                          'rgba(153, 102, 255, 1)',-->
+<!--                          'rgba(255, 159, 64, 1)',-->
+<!--                          'rgba(240, 120, 50, 1)',-->
+
+                      ],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="jumbotron" id="jt5">
+    <div class="container" style="text-align: center;padding-top: 400px;">
+      <b style="font-size: 70px;color: black;">Customize</b>
+    </div>
+  </div>
+  <div class="w3-container w3-padding-large w3-grey" style="background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+">
+    <h4 id="settings" style="color: white;"><b>Settings</b></h4>
+    <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+      <div class="w3-col s6 w3-dark-grey">
+        <p><i class="fa fa-key w3-xxlarge w3-text-light-grey"></i></p>
+        <p>Old Password</p>
+      </div>
+      <div class="w3-col s6 w3-teal">
+        <p><i class="fa fa-key w3-xxlarge w3-text-light-grey"></i></p>
+        <p>New Password</p>
+      </div>
+    </div>
+    <hr class="w3-opacity" style="color: white;">
+    <form action="/edit_pwd_save/" method="post">
+      {% csrf_token %}
+      <div class="w3-section">
+        <label style="color: white;">Old Password</label>
+        <input class="w3-input w3-border" type="password" name="oldpassword" required>
+      </div>
+      <div class="w3-section">
+        <label style="color: white;">New Password</label>
+        <input type="hidden"  name="student_id" value="{{ student.admin.id }}">
+        <input id="mypwd" class="w3-input w3-border" type="password" name="newpassword" required>
+      </div>
+      <div class="w3-section">
+        <input type="checkbox" onclick="pwdFunction()">
+        <label style="color: white;">Show Password</label>
+      </div>
+      <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-key w3-margin-right"></i>Submit</button>
+    </form>
+  </div>
+  <!-- Footer -->
+  <footer class="w3-container w3-dark-grey">
+    <div style="text-align: center;padding: 20px 0 20px 20px;font-size: 20px;">
+      <div class="row" >
+        <div class="col-lg-6">
+          <b style="font-size: 30px">About Group-47:</b>
+          <br>
+          <ul class="list-unstyled">
+            <li>Abraham Ahmed, student from Computer department.</li>
+            <li>Ashutosh Rajput, student from Computer department.</li>
+            <li>Atharva Mohod, student from Computer department.</li>
+            <li>Saurabh Bade, student from ENTC department.</li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <b style="font-size: 30px">Instructor:</b>
+          <br>
+          <p>Mrs.Ranjana Badre and Mr.Rudraguada Patil are the instructors of Group-47.</p>
+          <br>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="w3-black w3-center w3-padding-24">@<a href="https://mitaoe.ac.in/" title="MITAOE" target="_blank" class="w3-hover-opacity">MITAOE</a></div>
+
+  <!-- End page content -->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="{% static 'myproject/js/viewpwd.js'%}" type="text/javascript"></script>
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>

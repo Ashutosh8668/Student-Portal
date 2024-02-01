@@ -1,0 +1,121 @@
+ html,body
+                {
+                    width: 100%;
+                    height: 100%;
+                    margin: 0px;
+                    padding: 0px;
+                    overflow-x: hidden;
+                }
+                :root{
+                    --one-color: #faf9f5;
+                    --two-color: #000000;
+                    --three-color: #63e9f7;
+                    --four-color: #037ffc;
+                    --five-color: #778396;
+                    --six-color: #22c751;
+                    --seven-color: #d6ffef;
+                    --eight-color: #d6ffef;
+                }
+                .light-mode{
+                    --one-color: #faf9f5;
+                    --two-color: #000000;
+                    --three-color: #63e9f7;
+                    --four-color: #037ffc;
+                    --five-color: #778396;
+                    --six-color: #22c751;
+                    --seven-color: #d6ffef;
+                    --eight-color: #f1fa8c;
+                }
+                .dracula-mode{
+                    --one-color: #44475a;
+                    --two-color: #ff79c6;
+                    --three-color: #282a36;
+                    --four-color: #ff5555;
+                    --five-color: #8be9fd;
+                    --six-color: #50fa7b;
+                    --seven-color: #44475a;
+                    --eight-color: #ff79c6;
+                }
+                .dark-mode{
+                    --one-color: #000000;
+                    --two-color: #faf9f5;
+                    --three-color: #000000;
+                    --four-color: #faf9f5;
+                    --five-color: #faf9f5;
+                    --six-color: #faf9f5;
+                    --seven-color: #000000;
+                    --eight-color: #faf9f5;
+                }
+            body{
+                background-image: url(https://cdn-i.pageflow.io/_a411/_e30429/main/video_files/posters/000/069/737/v1/medium/poster-0.JPG);
+                /*https://wallpapersmug.com/download/1920x1080/4d7d03/light-colors-geometric-pattern-abstract.jpg*/
+                background-repeat: no-repeat;
+                max-width: 100%;
+                background-size: cover;
+
+            }
+            .card-header{
+                color: var(--five-color);
+            }
+            #card1{
+                background-color: var(--one-color);
+                color: var(--four-color);
+            }
+            #card2{
+                background-color: var(--one-color);
+                color: var(--five-color);
+            }
+            #card3{
+                background-color: var(--one-color);
+                color: var(--six-color);
+            }
+            #card1:hover{
+                background-color: var(--four-color);
+                background-image: url(https://wallpapersmug.com/download/1920x1080/4d7d03/light-colors-geometric-pattern-abstract.jpg);background-repeat: no-repeat;max-width: 100%;background-size: cover;
+            }
+            #card1:hover .card-header,
+            #card1:hover .card-text,
+            #card1:hover .card-title{
+                color: var(--one-color);
+            }
+            #card2:hover{
+                background-color: var(--five-color);
+                background-image: url(https://wallpapersmug.com/download/1920x1080/4d7d03/light-colors-geometric-pattern-abstract.jpg);background-repeat: no-repeat;max-width: 100%;background-size: cover;
+            }
+            #card2:hover .card-header,
+            #card2:hover .card-text,
+            #card2:hover .card-title{
+                color: var(--one-color);
+            }
+            #card3:hover{
+                background-color: var(--six-color);
+                background-image: url(https://wallpapersmug.com/download/1920x1080/4d7d03/light-colors-geometric-pattern-abstract.jpg);background-repeat: no-repeat;max-width: 100%;background-size: cover;
+            }
+            #card3:hover .card-header,
+            #card3:hover .card-text,
+            #card3:hover .card-title{
+                color: var(--one-color);
+            }
+            .card-body{
+                margin-bottom: 50px;
+            }
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+                font-size: 14px;
+              }
+              th{
+                  color: var(--two-color);
+                  background-color: var(--one-color);
+              }
+              td, th {
+                color: var(--two-color);
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+              }
+
+              tr:nth-child(even) {
+                background-color: var(--three-color);
+              }

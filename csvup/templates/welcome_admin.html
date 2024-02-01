@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+  <title>MITA+</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+  <style>
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("/w3images/coffeehouse.jpg");
+  min-height: 75%;
+}
+.menu {
+  display: none;
+}
+#jt{
+  background-image: url("{% static 'myproject/media/tree.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#jt2{
+  background-image: url("{% static 'myproject/media/teachers.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#jt3{
+  background-image: url("{% static 'myproject/media/class.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#jt4{
+  background-image: url("{% static 'myproject/media/ground.jpg'%}");
+  min-height: 100%;
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#smallbox{
+  background-color: #eee;
+  width: 100%;
+  height: 500px;
+  border: 1px dotted black;
+  overflow-y: scroll;
+}
+#smallbox::-webkit-scrollbar {
+    display: none;
+}
+
+#smallbox {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+</style>
+</head>
+<body>
+<div class="w3-top">
+  <div class="w3-row w3-padding w3-black">
+    <div class="w3-col s3">
+      <a href="#" class="w3-button w3-block w3-black">HOME</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#insert" class="w3-button w3-block w3-black">ADD STUDENTS</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#updatedetails" class="w3-button w3-block w3-black">UPDATE DETAILS</a>
+    </div>
+    <div class="w3-col s3">
+      <a href="#deletedetails" class="w3-button w3-block w3-black">REMOVE STUDENTS</a>
+    </div>
+  </div>
+</div>
+<div class="jumbotron" id="jt">
+  <div class="w3-top" style="padding-top: 50px;position: relative;z-index: 0;">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s6">
+        <a href="#settings" class="w3-button w3-block w3-black">SETTINGS</a>
+      </div>
+      <div class="w3-col s6">
+        <a href="/logout_user/" class="w3-button w3-block w3-black">SIGN OUT</a>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="text-align: center;padding-top: 300px;">
+    <b style="font-size: 100px;color: white;background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);padding: 10px 30px 10px 30px;">MITA+</b>
+  </div>
+</div>
+<div class="form-group">
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == 'error' %}
+  <div class="alert alert-danger" style="margin-top:10px;text-align: center;">{{ message }}</div>
+  {% endif %}
+  {% if message.tags == 'success' %}
+  <div class="alert alert-success" style="margin-top:10px;text-align: center;">{{ message }}</div>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+</div>
+<div id="updatedetails">
+ <h5 class="w3-center w3-padding-48"> <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#updates" role="button" aria-expanded="false" aria-controls="updates"><span class="w3-tag w3-wide">UPDATE DETAILS</span></a></h5>
+</div>
+<div style="text-align: center;padding-bottom: 30px;"><h5>Toggle to view all details in a tabulated format including search bars of name, prn, and email.</h5>
+  <h5>Use search bars of name, prn, and email once at a time.</h5></div>
+<div class="collapse" id="updates" style="padding-bottom: 50px;">
+  <div class="w3-top" style="padding-top: 50px;position: relative;z-index: 0;">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s4">
+        <input class="w3-button w3-block w3-black" type="text" placeholder="Search Name" id="mySearch1" onkeyup="searchname()" aria-label="Search">
+      </div>
+      <div class="w3-col s4">
+        <input class="w3-button w3-block w3-black" type="text" placeholder="Search PRN" id="mySearch2" onkeyup="searchprn()" aria-label="Search">
+      </div>
+      <div class="w3-col s4">
+        <input class="w3-button w3-block w3-black" type="text" placeholder="Search Email" id="mySearch3" onkeyup="searchemail()" aria-label="Search">
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0" id="smallbox">
+    <table class="table table-hover text-nowrap">
+      <thead>
+      <tr>
+        <th>SNO.</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th>
+        <th>Email ID</th>
+        <th>PRN</th>
+        <th>Branch</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Year of Admission</th>
+        <th>Type of Admission</th>
+        <th>Update</th>
+      </tr>
+      </thead>
+      <tbody id="myTable" class="searchable">
+      {%for student in student%}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{student.admin.first_name}}</td>
+        <td>{{student.middle_name}}</td>
+        <td>{{student.admin.last_name}}</td>
+        <td>{{student.admin.email}}</td>
+        <td>{{student.prn}}</td>
+        <td>{{student.branch}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.date_of_birth}}</td>
+        <td>{{student.year_of_admission}}</td>
+        <td>{{student.type_of_admission}}</td>
+        <td><a  href="/edit_student/{{ student.admin.id }}"><button class="btn btn-warning" type="submit" style=" padding: 10px 50px 10px 50px;">Update</button></a></td>
+      </tr>
+      {%endfor%}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="jumbotron" id="jt2">
+  <div class="container" style="text-align: center;padding-top: 600px;">
+    <b style="font-size: 70px;color: black;">FACULTIES</b>
+  </div>
+</div>
+<div class="w3-container" id="insert" style="padding-bottom: 100px;">
+  <div class="w3-content" style="max-width:700px">
+
+    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">ADD STUDENT</span></h5>
+
+    <div class="w3-row w3-center w3-card w3-padding">
+      <a href="javascript:void(0)" onclick="openMenu(event, 'manual');" id="myLink">
+        <div class="w3-col s6 tablink" style="color: black;">INSERT MANUALLY</div>
+      </a>
+      <a href="javascript:void(0)" onclick="openMenu(event, 'import');">
+        <div class="w3-col s6 tablink" style="color: black;">IMPORT CSV</div>
+      </a>
+    </div>
+
+    <div id="manual" class="w3-container menu w3-padding-48 w3-card">
+      <form action="/add_student_save/" method="POST">
+        {%csrf_token%}
+        <p><input name="first_name" type="text" class="w3-input w3-padding-16 w3-border" placeholder="Enter First Name" required></p>
+        <p><input name="last_name" type="text" class="w3-input w3-padding-16 w3-border" placeholder="Enter Last Name" required></p>
+        <p><input name="email" type="email" class="w3-input w3-padding-16 w3-border" placeholder="Enter Email" required></p>
+        <p><input name="current_address" type="text" class="w3-input w3-padding-16 w3-border" placeholder="Enter Current Address" required></p>
+        <p><input name="password" id="mypwd" type="password" class="w3-input w3-padding-16 w3-border" placeholder="Enter Password" required></p>
+        <p style="float: left;"><input type="checkbox" onclick="pwdFunction()" class="w3-input w3-padding-16 w3-border"><h1 style="font-size: 15px;padding-left: 30px;">Show Password</h1></p>
+        <p><input name="prn" type="text" class="w3-input w3-padding-16 w3-border" placeholder="Enter PRN" required></p>
+        <p><button class="w3-button w3-black" type="submit">SUBMIT</button></p>
+      </form>
+    </div>
+
+    <div id="import" class="w3-container menu w3-padding-48 w3-card">
+      <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">INSTRUCTIONS</span></h5>
+      <p>First download the template provided and fill out the table. Make sure that the table data is correct and normalised before uploading the csv file.</p>
+      <p><p style="color: red;">Warning!</p> If any error occurs while uploading, first find how many users are created and remove them from your csv file or delete all users and upload the csv file again.</p>
+      <a  href="/temp/"><p><button class="w3-button w3-black" type="click">Download Template for CSV Import</button></p></a>
+      <form action="/upload/" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <p><input name="file" type="file" class="w3-input w3-padding-16 w3-border" placeholder="Upload CSV" required></p>
+        <p><button class="w3-button w3-black" type="submit">SUBMIT</button></p>
+      </form>
+      <a  href="/download/"><p><button class="w3-button w3-black" type="click">Download All Students-1</button></p></a>
+      <a  href="/download1/"><p><button class="w3-button w3-black" type="click">Download All Students-2</button></p></a>
+
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron" id="jt3">
+  <div class="container" style="text-align: center;padding-top: 600px;">
+    <b style="font-size: 70px;color: black;">LECTURE</b>
+  </div>
+</div>
+
+<div id="deletedetails">
+  <h5 class="w3-center w3-padding-48"> <a style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="#deletes" role="button" aria-expanded="false" aria-controls="deletes"><span class="w3-tag w3-wide">DELETE DETAILS</span></a></h5>
+</div>
+<div style="text-align: center;padding-bottom: 30px;"><h5>Toggle to view all details in a tabulated format including search bars of name, prn, and email.</h5>
+  <h5>Use search bars of name, prn, and email once at a time.</h5></div>
+<div class="collapse" id="deletes" style="padding-bottom: 50px;">
+  <div class="w3-top" style="padding-top: 50px;position: relative;z-index: 0;">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s4">
+        <input class="w3-button w3-block w3-black" type="text" placeholder="Search Name" id="dmySearch1" onkeyup="dsearchname()" aria-label="Search">
+      </div>
+      <div class="w3-col s4">
+        <input class="w3-button w3-block w3-black" type="text" placeholder="Search PRN" id="dmySearch2" onkeyup="dsearchprn()" aria-label="Search">
+      </div>
+      <div class="w3-col s4">
+        <input class="w3-button w3-block w3-black" type="text" placeholder="Search Email" id="dmySearch3" onkeyup="dsearchemail()" aria-label="Search">
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive p-0" id="smallbox">
+    <table class="table table-hover text-nowrap">
+      <thead>
+      <tr>
+        <th>SNO.</th>
+        <th>First Name</th>
+        <th>Middle Name</th>
+        <th>Last Name</th>
+        <th>Email ID</th>
+        <th>PRN</th>
+        <th>Branch</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Year of Admission</th>
+        <th>Type of Admission</th>
+        <th>Update</th>
+      </tr>
+      </thead>
+      <tbody id="dmyTable" class="searchable">
+      {%for student in student%}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{student.admin.first_name}}</td>
+        <td>{{student.middle_name}}</td>
+        <td>{{student.admin.last_name}}</td>
+        <td>{{student.admin.email}}</td>
+        <td>{{student.prn}}</td>
+        <td>{{student.branch}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.date_of_birth}}</td>
+        <td>{{student.year_of_admission}}</td>
+        <td>{{student.type_of_admission}}</td>
+
+        <td><a  href="/delete_student_save/{{ student.admin.id }}"><button onclick="myFunction()" class="btn btn-danger" type="submit" style=" padding: 10px 50px 10px 50px;">Delete</button></a></td>
+      </tr>
+      {%endfor%}
+      </tbody>
+    </table>
+  </div>
+  <div class="w3-center w3-padding-48">
+<!--    <h5 class="w3-center w3-padding-48"> <a onclick="myFunction()" style="color: white;text-decoration: none;" data-bs-toggle="collapse" href="/all_out/" role="button" aria-expanded="false" aria-controls="deletes"><span class="w3-tag w3-wide">DELETE ALL DETAILS</span></a></h5>-->
+    <a  href="/all_out/"><button style="padding: 10px 100px 10px 100px;border: none; background-color: red;color: white;" onclick="myFunction()" type="button">Delete All</button></a>
+  </div>
+</div>
+<div class="jumbotron" id="jt4">
+  <div class="container" style="text-align: center;padding-top: 600px;">
+    <b style="font-size: 70px;color: black;">MITAOE</b>
+  </div>
+</div>
+
+<div id="settings" class="w3-container w3-padding-48 w3-card">
+  <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">SETTINGS</span></h5>
+  <form action="/edit_adminpwd_save/" method="POST">
+    {%csrf_token%}
+    <p><input name="oldpassword" type="password" class="w3-input w3-padding-16 w3-border" placeholder="Enter Old Password" required></p>
+    <p><input name="newpassword" type="password" class="w3-input w3-padding-16 w3-border" placeholder="Enter New Password" required></p>
+    <p><button class="w3-button w3-black" type="submit">SUBMIT</button></p>
+  </form>
+</div>
+
+<footer class="w3-container w3-dark-grey">
+  <div style="text-align: center;padding: 20px 0 20px 20px;font-size: 20px;">
+    <div class="row" >
+      <div class="col-lg-6">
+        <b style="font-size: 30px">About Group-47:</b>
+        <br>
+        <ul class="list-unstyled">
+          <li>Abraham Ahmed, student from Computer department.</li>
+          <li>Ashutosh Rajput, student from Computer department.</li>
+          <li>Atharva Mohod, student from Computer department.</li>
+          <li>Saurabh Bade, student from ENTC department.</li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <b style="font-size: 30px">Instructor:</b>
+        <br>
+        <p>Mrs.Ranjana Badre and Mr.Rudraguada Patil are the instructors of Group-47.</p>
+        <br>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="w3-black w3-center w3-padding-24">@<a href="https://mitaoe.ac.in/" title="MITAOE" target="_blank" class="w3-hover-opacity">MITAOE</a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="{% static 'myproject/js/delete_alert.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/update.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/delete.js'%}" type="text/javascript"></script>
+<script src="{% static 'myproject/js/viewpwd.js'%}" type="text/javascript"></script>
+<script>
+// Tabbed Menu
+function openMenu(evt, menuName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("menu");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
+  }
+  document.getElementById(menuName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-dark-grey";
+}
+document.getElementById("myLink").click();
+</script>
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--{% load static %}-->
+<!--<html>-->
+<!--<head>-->
+<!--  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+<!--  <title>Welcome</title>-->
+<!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--  <link rel="stylesheet" href="{% static 'myproject/css/welcome_admin.css'%}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav style="background-color: var(&#45;&#45;three-color);" class="navbar navbar-light" style="background-color: #e3f2fd;">-->
+<!--  <div class="container-fluid">-->
+<!--    <a style="color: var(&#45;&#45;two-color);" class="navbar-brand" href="#">Head of Department</a>-->
+<!--    <button style="background-color: var(&#45;&#45;eight-color);" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li class="nav-item">-->
+<!--          <a style="color: var(&#45;&#45;two-color);" class="nav-link" href="https://mitaoe.ac.in/">MITAOE</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a style="color: var(&#45;&#45;two-color);" class="nav-link" href="/logout_user/">Sign Out</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+<!--<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">-->
+<!--  <div class="carousel-indicators">-->
+<!--    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>-->
+<!--    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>-->
+<!--    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>-->
+<!--    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>-->
+<!--  </div>-->
+<!--  <div class="carousel-inner">-->
+<!--    <div class="carousel-item active" data-bs-interval="4000">-->
+<!--      <a href="/upload/" style="text-decoration: none;"><img src="https://searchengineland.com/wp-content/seloads/2017/07/university-college-student-ss-1920.jpg" class="d-block w-100" alt="..."></a>-->
+<!--      <div class="carousel-caption d-none d-md-block">-->
+<!--        <h5>Add New Students</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="carousel-item" data-bs-interval="4000">-->
+<!--      <a href="depdetails.htm" style="text-decoration: none;"><img src="https://wallpaperaccess.com/full/697873.jpg" class="d-block w-100" alt="..."></a>-->
+<!--      <div class="carousel-caption d-none d-md-block">-->
+<!--        <h5>Add New Faculty</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="carousel-item" data-bs-interval="4000">-->
+<!--      <a href="grade.htm" style="text-decoration: none;"><img src="https://www.teahub.io/photos/full/190-1905111_library-books.jpg" class="d-block w-100" alt="..."></a>-->
+<!--      <div class="carousel-caption d-none d-md-block">-->
+<!--        <h5>Add New Field</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="carousel-item">-->
+<!--      <a href="gdetails.htm" style="text-decoration: none;"><img src="https://trainingindustry.com/content/uploads/2022/10/10.3.22-feedback-1920x1080.jpg" class="d-block w-100" alt="..."></a>-->
+<!--      <div class="carousel-caption d-none d-md-block">-->
+<!--        <h5>Feedback</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">-->
+<!--    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--    <span class="visually-hidden">Previous</span>-->
+<!--  </button>-->
+<!--  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">-->
+<!--    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--    <span class="visually-hidden">Next</span>-->
+<!--  </button>-->
+<!--</div>-->
+<!--<div style="background-color: var(&#45;&#45;three-color);">-->
+<!--  <div class="row">-->
+<!--    <div class="col-lg-4" style="color: var(&#45;&#45;two-color);text-align:center;padding-top: 10px;">-->
+<!--      <h3>5,000 Students</h3>-->
+<!--      <p>Set your targets</p>-->
+<!--    </div>-->
+<!--    <div class="col-lg-4" style="color: var(&#45;&#45;two-color);text-align:center;padding-top: 10px;">-->
+<!--      <h3>Expert Advice</h3>-->
+<!--      <p>Email will auto fill data</p>-->
+<!--    </div>-->
+<!--    <div class="col-lg-4" style="color: var(&#45;&#45;two-color);text-align:center;padding-top: 10px;">-->
+<!--      <h3>Update Details</h3>-->
+<!--      <p>Get all information up to date</p>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div style="background-color: var(&#45;&#45;seven-color);text-align: center;padding-top: 50px;padding-bottom: 50px;">-->
+<!--  <b style="font-size:50px;color: var(&#45;&#45;two-color);"><b>Welcome </b><b>Admin</b></b>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--  <div>-->
+<!--    <div class="row">-->
+
+<!--      <div class="col-lg-6" style="text-align: center;">-->
+<!--        <div style="background-color: var(&#45;&#45;three-color);width: 110%;"><b style="color: var(&#45;&#45;two-color);font-size: 40px;">Student Details</b></div>-->
+<!--        <div class="row" style="padding-top: 50px;padding-bottom: 50px;">-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="/add_student/" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card1" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">Manual Adding</div>-->
+<!--                  <div  class="card-body">-->
+<!--                    <h5 class="card-title">Student Details</h5>-->
+<!--                    <p class="card-text">In this section you can edit each and every student record.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="/view_student/" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card2" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">View</div>-->
+<!--                  <div  class="card-body">-->
+<!--                    <h5 class="card-title">Student Details</h5>-->
+<!--                    <p class="card-text">In this section you can view each and every record of all students.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="/delete_student/" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card3" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">Delete</div>-->
+<!--                  <div class="card-body">-->
+<!--                    <h5 class="card-title">Student Details</h5>-->
+<!--                    <p class="card-text">In this section you can delete the required student record.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-6" style="background-image: url(https://images.prismic.io/element451/c6901d07-4418-4aa7-8aed-bab75124a10c_Main+Image_+7+Creative+Ways+to+Increase+College+Enrollment.jpg?auto=format&ixlib=react-9.0.3&h=1080&w=1920);-->
+<!--                background-repeat: no-repeat;-->
+<!--                max-width: 100%;-->
+<!--                background-size: cover;">-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-6" style="background-image: url(https://www.incimages.com/uploaded_files/image/1920x1080/getty_476111824_368922.jpg);-->
+<!--                background-repeat: no-repeat;-->
+<!--                max-width: 100%;-->
+<!--                background-size: cover;">-->
+
+<!--      </div>-->
+<!--      <div class="col-lg-6" style="padding-left: 0;text-align: center;">-->
+<!--        <div style="background-color: var(&#45;&#45;three-color);width: 110%;"><b style="color: var(&#45;&#45;two-color);font-size: 40px;">Faculty Details</b></div>-->
+<!--        <div class="row" style="padding: 50px 0 50px 0;">-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="depupdate.htm" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card1" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">Edit</div>-->
+<!--                  <div class="card-body">-->
+<!--                    <h5 class="card-title">Faculty Details</h5>-->
+<!--                    <p class="card-text">In this section you can edit each and every faculty record.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="depdisplay.htm" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card2" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">View</div>-->
+<!--                  <div class="card-body">-->
+<!--                    <h5 class="card-title">Faculty Details</h5>-->
+<!--                    <p class="card-text">In this section you can view each and every record of all the faculties.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="depdelete.htm" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card3" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">Delete</div>-->
+<!--                  <div class="card-body">-->
+<!--                    <h5 class="card-title">Faculty Details</h5>-->
+<!--                    <p class="card-text">In this section you can delete the record of any faculty.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <video autoplay loop muted plays-inline style="position: absolute;right: 0;bottom: 0;z-index: -1;">-->
+<!--    <source src="{% static 'myproject/media/videoplayback.webm'%}" type="video/webm">-->
+<!--  </video>-->
+<!--  <div style="background: var(&#45;&#45;seven-color);padding: 20px 20px 20px 20px;"><video autoplay loop muted plays-inline style="width: 100%;height: 50%;">-->
+<!--    <source src="{% static 'myproject/media/video1.mp4'%}" type="video/mp4">-->
+<!--  </video></div>-->
+<!--  <div>-->
+<!--    <div class="row">-->
+
+<!--      <div class="col-lg-6" style="text-align: center;">-->
+<!--        <div style="background-color: var(&#45;&#45;three-color);width: 110%;"><b style="color: var(&#45;&#45;two-color);font-size: 40px;">Field Control</b></div>-->
+<!--        <div class="row" style="padding-top: 50px;padding-bottom: 50px;">-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="gtupdate.htm" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card1" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">Edit</div>-->
+<!--                  <div style="margin-bottom: 70px;" class="card-body">-->
+<!--                    <h5 class="card-title">Field Details</h5>-->
+<!--                    <p class="card-text">In this section you can edit each and every field details.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="gtdisplay.htm" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card2" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">View</div>-->
+<!--                  <div style="margin-bottom: 70px;" class="card-body">-->
+<!--                    <h5 class="card-title">Field Details</h5>-->
+<!--                    <p class="card-text">In this section you can view each and every field details.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <a href="gtdelete.htm" style="text-decoration: none;">-->
+<!--              <div class="container">-->
+<!--                <div id="card3" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                  <div class="card-header">Delete</div>-->
+<!--                  <div class="card-body">-->
+<!--                    <h5 class="card-title">Field Details</h5>-->
+<!--                    <p class="card-text">In this section you can delete the required field details.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-6" style="background-image: url(https://5thvoice.news/kkg_admin/images/categoryimages/1592331635nbb.jpg);-->
+<!--                background-repeat: no-repeat;-->
+<!--                max-width: 100%;-->
+<!--                background-size: cover;">-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="row">-->
+<!--    <div class="col-lg-6" style="background-image: url(https://olvy.co/blog/content/images/2022/04/whais-is-feedback-loop.png);-->
+<!--                background-repeat: no-repeat;-->
+<!--                max-width: 100%;-->
+<!--                background-size: cover;">-->
+
+<!--    </div>-->
+<!--    <div class="col-lg-6" style="padding-left: 0;text-align: center;">-->
+<!--      <div style="background-color: var(&#45;&#45;three-color);width: 110%;"><b style="color: var(&#45;&#45;two-color);font-size: 40px;">Feedback Control</b></div>-->
+<!--      <div class="row" style="padding: 50px 0 50px 0;">-->
+<!--        <div class="col-md-4">-->
+<!--          <a href="gdupdate.htm" style="text-decoration: none;">-->
+<!--            <div class="container">-->
+<!--              <div id="card1" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                <div class="card-header">Edit</div>-->
+<!--                <div class="card-body">-->
+<!--                  <h5 class="card-title">Feedback Details</h5>-->
+<!--                  <p class="card-text">In this section you can edit each and every record of feedback details.</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--          <a href="gddisplay.htm" style="text-decoration: none;">-->
+<!--            <div class="container">-->
+<!--              <div id="card2" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                <div class="card-header">View</div>-->
+<!--                <div class="card-body">-->
+<!--                  <h5 class="card-title">Feedback Details</h5>-->
+<!--                  <p class="card-text">In this section you can view each and every record of feedback details.</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--        <div class="col-md-4">-->
+<!--          <a href="gddelete.htm" style="text-decoration: none;">-->
+<!--            <div class="container">-->
+<!--              <div id="card3" class="card border mb-3" style="max-width: 18rem;">-->
+<!--                <div class="card-header">Delete</div>-->
+<!--                <div class="card-body">-->
+<!--                  <h5 class="card-title">Feedback Details</h5>-->
+<!--                  <p class="card-text">In this section you can delete the required feedback record .</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div style="background-color: var(&#45;&#45;one-color);text-align: center;padding: 50px;">-->
+<!--  <b style="color: var(&#45;&#45;two-color);font-size: 50px;">Themes</b>-->
+<!--</div>-->
+<!--<div>-->
+<!--  <div class="card-group">-->
+<!--    <div style="background-color: var(&#45;&#45;one-color);" id="icon3" class="card">-->
+<!--      <img src="https://wallpapercave.com/wp/wp3439738.jpg" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <h5 style="color: var(&#45;&#45;two-color);text-align: center;" class="card-title">Light mode</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div style="background-color: var(&#45;&#45;one-color);" id="icon2" class="card">-->
+<!--      <img src="https://i.imgur.com/22JZRPa.png" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <h5 style="color: var(&#45;&#45;two-color);text-align: center;" class="card-title">Dracula mode</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div style="background-color: var(&#45;&#45;one-color);" id="icon" class="card">-->
+<!--      <img src="https://wallpaperaccess.com/full/2562648.jpg" class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <h5 style="color: var(&#45;&#45;two-color);text-align: center;" class="card-title">Dark Mode</h5>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div style="text-align: center;color: var(&#45;&#45;two-color);padding: 20px 0 20px 20px;font-size: 20px;background-color: var(&#45;&#45;one-color);">-->
+<!--  <div class="row" >-->
+<!--    <div class="col-lg-6">-->
+<!--      <b style="font-size: 30px">About Group-47:</b>-->
+<!--      <br>-->
+<!--      <ul class="list-unstyled">-->
+<!--        <li>Abraham Ahmed, student from Computer department.</li>-->
+<!--        <li>Ashutosh Rajput, student from Computer department.</li>-->
+<!--        <li>Atharva Mohod, student from Computer department.</li>-->
+<!--        <li>Saurabh Bade, student from ENTC department.</li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <div class="col-lg-6">-->
+<!--      <b style="font-size: 30px">Instructor:</b>-->
+<!--      <br>-->
+<!--      <p>Mrs.Ranjana Badre and Mr.Rudraguada Patil are the instructors of Group-47.</p>-->
+<!--      <br>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div style="color: var(&#45;&#45;one-color);font-size: 20px;text-align: center;background-color: var(&#45;&#45;two-color);">-->
+<!--  <h>@MITAOE</h>-->
+<!--</div>-->
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>-->
+<!--<script src="{% static 'myproject/js/light.js'%}" type="text/javascript"></script>-->
+<!--<script src="{% static 'myproject/js/dark.js'%}" type="text/javascript"></script>-->
+<!--<script src="{% static 'myproject/js/dracula.js'%}" type="text/javascript"></script>-->
+<!--</body>-->
+<!--</html>-->
